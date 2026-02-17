@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Thiệp Năm Mới 2026 • Năm Ngọ 🐴</title>
+
+  <link rel="stylesheet" href="./styles.css?v=20260216" />
+</head>
+
+<body>
+  <!-- Fireworks / FX -->
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <!-- Decorative layer (CSS animation, not GIF) -->
+  <div class="lantern lantern--left" aria-hidden="true">
+    <img src="./image/lantern.svg" alt="" />
+  </div>
+  <div class="lantern lantern--right" aria-hidden="true">
+    <img src="./image/lantern.svg" alt="" />
+  </div>
+  <div class="cloud cloud--1" aria-hidden="true"><img src="./image/cloud.svg" alt="" /></div>
+  <div class="cloud cloud--2" aria-hidden="true"><img src="./image/cloud.svg" alt="" /></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="card">
+
+      <!-- ===== Post-login flow overlay ===== -->
+      <div class="flow hidden" id="flow" role="dialog" aria-modal="true" aria-label="Trò chơi đầu năm">
+        <div class="flowCard">
+          <!-- Stage: Intro -->
+          <section class="stage" id="stageIntro">
+            <div class="stageHero">
+              <img class="horseLogo" src="./image/horse-2026.png" alt="Năm Ngọ 2026" />
+            </div>
+            <h2 class="stageTitle">Chúc Mừng Năm Mới 2026</h2>
+            <p class="stageSub">Đếm ngược đến khoảnh khắc giao thừa (Tết 2026)</p>
+
+            <div class="countdown" aria-label="Bộ đếm giờ">
+              <div class="cdCell"><span id="cdDays">0</span><small>Ngày</small></div>
+              <div class="cdCell"><span id="cdHours">00</span><small>Giờ</small></div>
+              <div class="cdCell"><span id="cdMinutes">00</span><small>Phút</small></div>
+              <div class="cdCell"><span id="cdSeconds">00</span><small>Giây</small></div>
+            </div>
+
+            <button class="btnPrimary" id="btnIntroStart" type="button">Bắt đầu nhận lộc ✨</button>
+          </section>
+
+          <!-- Stage: Bank info -->
+          <section class="stage hidden" id="stageBank">
+            <h2 class="stageTitle">Nhập thông tin nhận lộc</h2>
+            <p class="stageSub">Vui lòng nhập đúng thông tin để nhận lộc đầu năm nhé 🧧</p>
+
+            <div class="formGrid">
+              <label class="field">
+                <span>Tên ngân hàng</span>
+                <input id="bankName" type="text" placeholder="VD: Vietcombank" autocomplete="off" />
+              </label>
+              <label class="field">
+                <span>Số tài khoản</span>
+                <input id="bankAccount" type="text" inputmode="numeric" placeholder="VD: 0123456789" autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="rowActions">
+              <button class="btnPrimary" id="btnBankConfirm" type="button">Xác nhận</button>
+              <button class="btnGhost" id="btnBankBack" type="button">Quay lại</button>
+            </div>
+
+            <div class="noteBox" id="bankNote">Sau khi xác nhận bạn sẽ được chơi vòng quay may mắn 🎡</div>
+          </section>
+
+          <!-- Stage: Wheel -->
+          <section class="stage hidden" id="stageWheel">
+            <h2 class="stageTitle">Vòng quay may mắn</h2>
+            <p class="stageSub">Chỉ có 2 phần quà: <b>Vòng tay Pandora</b> & <b>Nhẫn Pandora</b> 🎁</p>
+
+            <div class="wheelWrap">
+              <div class="wheelPointer" aria-hidden="true"></div>
+              <div class="wheel" id="wheel" aria-label="Vòng quay"></div>
+              <div class="wheelCenter" aria-hidden="true">LỘC</div>
+            </div>
+
+            <div class="rowActions">
+              <button class="btnPrimary" id="btnSpin" type="button">Quay ngay</button>
+              <button class="btnGhost" id="btnWheelBack" type="button">Quay lại</button>
+            </div>
+
+            <div class="resultBox hidden" id="wheelResult"></div>
+            <button class="btnPrimary hidden" id="btnWheelNext" type="button">Tiếp tục</button>
+          </section>
+
+          <!-- Stage: Fortune -->
+          <section class="stage hidden" id="stageFortune">
+            <h2 class="stageTitle">Lắc quẻ may mắn</h2>
+            <p class="stageSub">Lắc một cái là có lộc liền tay 🧧</p>
+
+            <div class="fortuneWrap">
+              <div class="envelope" id="envelope" aria-hidden="true">
+                <div class="envelopeTop"></div>
+                <div class="envelopeBody"></div>
+                <div class="envelopeSeal">福</div>
+              </div>
+
+              <div class="fortuneCard" id="fortuneCard">
+                <div class="fortuneMoney" id="fortuneMoney">—</div>
+                <div class="fortuneMsg" id="fortuneMsg">Bấm “Lắc quẻ” để nhận lời chúc.</div>
+                <div class="fortuneMeta" id="fortuneMeta"></div>
+              </div>
+            </div>
+
+            <div class="rowActions">
+              <button class="btnPrimary" id="btnShake" type="button">Lắc quẻ</button>
+        
+            </div>
+
+            <button class="btnPrimary hidden" id="btnFinish" type="button">Xác nhận ✨</button>
+            <p class="stageSub">Bấm xác nhận để bé thư cute nhận thông tin nè 🧧</p>
+          </section>
+        </div>
+      </div>
+      <!-- ===== End flow overlay ===== -->
+
+      <!-- ===== Lock overlay (login) ===== -->
+      <div class="lock" id="lock">
+        <div class="lockPanel">
+          <div class="lockTitle">
+            <h2>🔒 Mở thiệp bằng TÊN + MẬT KHẨU</h2>
+            <span class="chip" id="chip">Chưa mở</span>
+          </div>
+
+          <div class="lockCountdown" aria-label="Đếm ngược">
+            <span class="lcdLabel">Đếm ngược Tết 2026:</span>
+            <span class="lcdNum"><b id="cdMiniDays">0</b>d</span>
+            <span class="lcdNum"><b id="cdMiniHours">00</b>:</span>
+            <span class="lcdNum"><b id="cdMiniMinutes">00</b>:</span>
+            <span class="lcdNum"><b id="cdMiniSeconds">00</b></span>
+          </div>
+
+          <p class="mini">
+            Chọn người cần xem, nhập mật khẩu rồi bấm <b>Mở thiệp</b>.
+            Nếu bạn đăng nhập <b>Owner</b>, bạn có thể xem thiệp của người khác mà không cần mật khẩu của họ.
+          </p>
+
+          <div class="row2">
+            <div class="selectWrap" id="selectWrap">
+              <button class="selectBtn" id="selectBtn" type="button">
+                <span id="selectText"><small>Chọn người…</small></span>
+                <span>▾</span>
+              </button>
+              <div class="menu hidden" id="menu">
+                <div class="menuHead">
+                  <input id="search" placeholder="Tìm tên hoặc key…" />
+                </div>
+                <div class="menuList" id="menuList"></div>
+              </div>
+            </div>
+
+            <input id="pass" type="password" placeholder="Mật khẩu" />
+          </div>
+
+          <div class="row2">
+            <button id="btnUnlock" class="btnPrimary" type="button">Mở thiệp ✨</button>
+            <button class="btnSecondary" id="btnOwnerView" type="button" disabled>Xem thiệp người này (Owner)</button>
+            <!-- NEW: Owner cho chơi lại (local) -->
+            <button class="btnSecondary" id="btnOwnerReplay" type="button" disabled>Cho chơi lại 🎡</button>
+            <button class="btnSecondary" id="btnHint" type="button">Tip mật khẩu</button>
+          </div>
+
+          <div class="row2">
+            <button class="btnDanger hidden" id="btnLogout" type="button">Đăng xuất</button>
+          </div>
+
+          <div class="status" id="status">👉 Chọn người + nhập mật khẩu để bắt đầu.</div>
+        </div>
+      </div>
+
+      <!-- ===== Topbar ===== -->
+      <div class="topbar">
+        <div class="badge" id="badge">🐴 Thiệp Năm Mới • Năm Ngọ 2026 🐎</div>
+
+        <div class="actions">
+          <span class="pill">Chạm / click để bắn pháo hoa 🎆</span>
+
+          <div class="countdownMini" title="Đếm ngược tới Tết 2026">
+            <span class="cdm"><b id="cdMiniDays2">0</b>d</span>
+            <span class="cdm"><b id="cdMiniHours2">00</b>:</span>
+            <span class="cdm"><b id="cdMiniMinutes2">00</b>:</span>
+            <span class="cdm"><b id="cdMiniSeconds2">00</b></span>
+          </div>
+
+          <!-- NEW: nút Nhận lộc (bị khóa cho tới khi gửi lời chúc) -->
+          <button class="btnSecondary" id="btnOpenLuck" type="button" disabled>🎁 Nhận lộc</button>
+
+          <div class="musicControls" aria-label="Điều khiển nhạc">
+            <select id="musicSelect" class="musicSelect" aria-label="Chọn nhạc"></select>
+            <button class="btnMusic" id="btnPrev" title="Bài trước">⏮</button>
+            <button class="btnMusic" id="btnMusic" aria-label="Bật/Tắt nhạc">
+              <span class="ico" aria-hidden="true">▶️</span><span class="txt">Phát nhạc</span>
+            </button>
+            <button class="btnMusic" id="btnNext" title="Bài tiếp">⏭</button>
+          </div>
+
+
+
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogin" type="button">🔐 Owner Login</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerLogout" type="button">🔓 Owner Logout</button>
+          <button class="btnSecondary hidden ownerBtn" id="btnOwnerDashboard" type="button">📊 Dashboard</button>
+        </div>
+      </div>
+
+      <!-- NEW: hint khóa game -->
+      <div id="gameLockHintTop" class="gameLockHintTop" style="display:none">
+        💌 Bạn hãy <b>Gửi lời chúc</b> cho bé Thư cute trước để mở khóa “Nhận lộc”.
+      </div>
+
+      <!-- ===== Main content ===== -->
+      <div class="content">
+        <div>
+          <h1>Chúc Mừng Năm Mới <span class="year" id="yearText">2026</span></h1>
+          <p class="sub" id="subLine">Mở khóa xong bạn sẽ thấy lời chúc dành riêng cho bạn 🎁</p>
+
+          <div class="wishBox">
+            <p class="wish" id="wish">🔒 Thiệp đang khóa. Hãy mở thiệp để xem lời chúc.</p>
+
+            <div class="row">
+              <input id="viewerName" placeholder="Tên (tự điền sau khi mở)" disabled />
+              <input id="yearInput" maxlength="6" inputmode="numeric" placeholder="Năm (vd: 2026)" />
+              <button id="btnWish" disabled type="button">Đổi lời chúc</button>
+            </div>
+
+            <div class="wishSend">
+              <div class="wishSendHead">💌 Bạn có muốn gửi lời chúc đến bé Thư cute không?</div>
+              <textarea id="wishMsg" rows="3" placeholder="Bạn hãy nhập vào đây gửi lời chúc đến bé Thư cute nhé..."></textarea>
+              <div class="row">
+                <button class="btnSecondary" id="btnSendWish" type="button" disabled>Gửi lời chúc</button>
+                <small class="muted" id="wishSendHint">* Bấm “Gửi” để lưu Firestore + gửi EmailJS (nếu đã cấu hình).</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="bubble">
+            <div class="blob" aria-hidden="true"></div>
+            <img id="avatarImg" class="avatarImg" src="./avatars/default.pnj.jpg" alt="Ảnh người nhận" />
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <label class="toggle">
+          <input type="checkbox" id="auto" checked />
+          Tự động bắn pháo hoa
+        </label>
+        <span>Tip: Bấm icon play mở nhạc rồi có thể chọn nhạc theo danh sách đó muốn nghe bài nào cũng được nhó. ✨</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Owner Dashboard Modal -->
+  <div id="ownerModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Owner Dashboard">
+    <div class="modalCard">
+      <div class="modalHead">
+        <div class="modalTitle">📊 Owner Dashboard</div>
+        <div class="modalBtns">
+          <button class="btnSecondary" id="btnTabViews" type="button">Lượt xem</button>
+          <button class="btnSecondary" id="btnTabWishes" type="button">Lời chúc</button>
+          <button class="btnSecondary" id="btnRefreshOwner" type="button">Làm mới</button>
+          <button class="btnPrimary" id="btnCloseOwner" type="button">Đóng</button>
+        </div>
+      </div>
+      <div id="ownerBody" class="modalBody">Đang tải...</div>
+    </div>
+  </div>
+
+  <!-- Tap audio overlay -->
+  <div id="tapAudio" class="tapAudio hidden" role="button" aria-label="Chạm để bật nhạc">
+    <div class="tapCard">
+      <div class="tapTitle">🔊 Chạm để bật nhạc</div>
+      <div class="tapSub">iPhone cần thao tác 1 lần để cho phép phát nhạc 🎶</div>
+      <div class="tapBtn">Chạm ngay ✨</div>
+    </div>
+  </div>
+
+  <!-- Success overlay -->
+  <div id="successPage" class="successPage hidden" role="dialog" aria-modal="true" aria-label="Gửi lời chúc thành công">
+    <div class="successCard">
+      <div class="successTick"><span>✅</span></div>
+      <h3 class="successTitle">Gửi lời chúc thành công!</h3>
+      <p class="successText">
+Cảm ơn bạn năm qua đã ở bên cạnh tôi nhé.
+Mong năm 2026 chúng ta vẫn tiếp tục đồng hành với nhau 💖
+Bấm nhận lộc để nhận lì xì 🧧 quay rồi không quay lại được đâu đều sẽ ra như cũ nên đừng chơi gian nhó 💕
+      </p>
+      <div class="row" style="justify-content:center">
+        <button id="btnSuccessLuck" class="btnSecondary" type="button">🎁 Nhận lộc ngay</button>
+        <button id="btnSuccessClose" class="btnPrimary" type="button">Quay lại thiệp</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="music" preload="metadata" loop playsinline webkit-playsinline></audio>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- config + services -->
+  <script src="./config.js"></script>
+  <script type="module" src="./services.js?v=20260216"></script>
+  <script type="module" src="./app.js?v=20260216"></script>
+</body>
+</html>
