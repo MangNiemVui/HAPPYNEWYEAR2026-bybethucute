@@ -1045,6 +1045,7 @@ function spinWheelToIndex(idx){
 function getWheelOutcomeFor(person){
   // ✅ luật: chỉ Hồng Nhung trúng nhẫn, không ai trúng vòng
   if (isHongNhung(person)) return 'ring';
+  if (person.key === 'bexinh') return 'bracelet';
   return 'none';
 }
 
