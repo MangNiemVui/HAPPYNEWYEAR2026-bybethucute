@@ -161,6 +161,14 @@
     "exts": ["jpg", "png", "webp", "jpeg"]
   },
   {
+  "key": "bexinh",
+  "label": "Bé Xinh",
+  "pass": "01012006",
+  "role": "guest",
+  "exts": ["jpg", "png", "webp", "jpeg"],
+  "firstWish": "✨ Chúc bé xinh đẹp rực rỡ cả năm, luôn vui vẻ hạnh phúc 💖🎁"
+},
+  {
     "key": "khách",
     "label": "khách",
     "pass": "123",
