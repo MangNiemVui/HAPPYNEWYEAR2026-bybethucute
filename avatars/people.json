@@ -79,7 +79,8 @@
     "label": "Nguyễn Ngọc",
     "pass": "11102002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
+    "firstWish":" Chúc mày tìm được công việc phù hợp lun hạnh phúc và hôn nhiên như bây giờ cảm ơn cứu t những lúc t khốn khó vcl nhé. Mãi iu bạn chúng ta nhất định thành công nè"
   },
   {
     "key": "dangthu",
@@ -111,14 +112,14 @@
     "pass": "22122002",
     "role": "guest",
     "exts": ["jpg", "png", "webp", "jpeg"],
-     "firstWish": " TỐT NGHIỆP! TỐT NGHIỆP! TỐT NGHIỆP! cái  gì quan trọng nhắc lại 3 lần nhé. Mong mày lần này sẽ hạnh phúc bên "ẻm " nhé móa mới tháng 1 chúc có bồ giờ có lun rồi kkk. Nhớ đi báo cùng tao nhé kkk ...nếu mà về di linh lun tao xuống di linh nhớ đón tiếp đó nghe chưa bro"
+     "firstWish": " TỐT NGHIỆP! TỐT NGHIỆP! TỐT NGHIỆP! cái  gì quan trọng nhắc lại 3 lần nhé. Mong mày lần này sẽ hạnh phúc bên ẻm nhé móa mới tháng 1 chúc có bồ giờ có lun rồi kkk. Nhớ đi báo cùng tao nhé kkk ...nếu mà về di linh lun tao xuống di linh nhớ đón tiếp đó nghe chưa bro"
   },
   {
     "key": "xuanmai",
     "label": "Chíp",
     "pass": "16062003",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
      "firstWish": " Chúc bé tìm được công việc phù hợp hơn kiếm nhiều tiền và hạnh phúc bên tình iu nè. Chúc em mọi việc điều thuận lợi nè mọi điều em mong đều thành nhé. Thương chị già này nhiều hơn"
   },
   {
@@ -126,7 +127,7 @@
     "label": "Thúy Hiền",
     "pass": "18122002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
      "firstWish":" Chúc mày lun đạt KPI thành công và thăng tiến trong công việc. Chín chắn hơn bớt khùm lại nhé bình tĩnh hơn trong mọi việc nè. Năm sau làm dư mua xe hơi lun nha kkk. Chúc mày tìm đc người iu mà mày mong muốn nè"
   },
   {
@@ -134,7 +135,7 @@
     "label": "Minh Thư",
     "pass": "18092006",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
     "firstWish":" Chúc con gái tốt nghiệp đúm hạn lun vui vẻ hồn nhiên như bây giờ nhé. Hạnh phúc bên gia đình và người con iu nhé "
   },
   {
@@ -142,7 +143,7 @@
     "label": "Cát Tường",
     "pass": "13072002",
     "role": "guest",
-    "exts": ["jpg", "png", "webp", "jpeg"]
+    "exts": ["jpg", "png", "webp", "jpeg"],
     "firstWish":" Chúc m mọi điều thuận lợi nè vạn sự như ý nè đồng thời đậu trung hí nhé đi trung quốc làm idol nhé... nhớ nổi tiếng tìm cho t mấy bạn nào đẹp đẹp làm quen nhé kkkk"
   },
   {
